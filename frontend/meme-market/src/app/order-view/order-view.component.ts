@@ -15,8 +15,6 @@ export class OrderViewComponent implements OnInit {
 
   displayedColumns: string[] = [
     "stock",
-    "type",
-    "status",
     "quantity",
     "price"
   ]

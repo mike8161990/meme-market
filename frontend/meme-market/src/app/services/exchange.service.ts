@@ -29,9 +29,10 @@ export class ExchangeService {
     });
   }
 
-  getStockOrders(stock: Stock): Order[] {
+  getStockOrders(stock: Stock, orderType = "Buy|Sell"): Order[] {
+    let orders = [];
     if (stock.symbol == "GME") {
-      return [
+      orders = [
         {
           stock: stock,
           quantity: 1,
@@ -56,14 +57,14 @@ export class ExchangeService {
         {
           stock: stock,
           quantity: 1,
-          price: 120,
+          price: 130,
           status: OrderStatus.Open,
           type: OrderType.Sell
         }
       ]
     }
     else {
-      return [
+      orders = [
         {
           stock: stock,
           quantity: 2,
@@ -73,5 +74,12 @@ export class ExchangeService {
         }
       ]
     }
+    return orders.filter(filterOrderType(orderType));
+  }
+}
+
+function filterOrderType(orderType) {
+  return function(element) {
+    return (orderType.indexOf(element.type)>-1); 
   }
 }
