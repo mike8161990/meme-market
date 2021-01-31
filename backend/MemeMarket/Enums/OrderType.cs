@@ -5,9 +5,9 @@ namespace MemeMarket.Enums
     public enum OrderType
     {
         [Description("Buy")]
-        Buy,
+        Buy = 0,
 
         [Description("Sell")]
-        Sell
+        Sell = 1
     }
 }

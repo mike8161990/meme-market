@@ -8,7 +8,7 @@
 	"extensions": [
 		"ms-dotnettools.csharp"
 	],
-	"forwardPorts": [5000, 5001],
+	"forwardPorts": [5000],
 	// "postCreateCommand": "dotnet restore",
     "remoteUser": "vscode",
     "workspaceFolder": "/workspace/backend",

@@ -1,85 +1,36 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Order, OrderStatus, OrderType, Position, Stock } from '../types';
+import { Observable } from 'rxjs';
+import { Order, Position, Stock } from '../types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExchangeService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getStocks(): Stock[] {
-    return [
-      {
-        name: "Gamestop",
-        symbol: "GME"
-      },
-      {
-        name: "AMC Entertainment Holdings",
-        symbol: "AMC"
-      }
-    ]
+  getAllStocks(): Observable<Stock[]> {
+    return this.http.get<Stock[]>("/api/stocks");
   }
 
-  getPositions(): Position[] {
-    return this.getStocks().map(s => <Position> {
-      stock: s,
-      cost: Math.random() * 30,
-      quantity: Math.random() * 10
+  getPositions(): Observable<Position[]> {
+    return this.http.get<Position[]>("/api/positions");
+  }
+
+  getBuyOrders(stock: Stock): Observable<Order[]> {
+    return this.http.get<Order[]>("/api/orders/buy", {
+      params: {
+        stockSymbol: stock.symbol
+      }
     });
   }
 
-  getStockOrders(stock: Stock, orderType = "Buy|Sell"): Order[] {
-    let orders = [];
-    if (stock.symbol == "GME") {
-      orders = [
-        {
-          stock: stock,
-          quantity: 1,
-          price: 125,
-          status: OrderStatus.Open,
-          type: OrderType.Buy
-        },
-        {
-          stock: stock,
-          quantity: 1,
-          price: 123,
-          status: OrderStatus.Open,
-          type: OrderType.Buy
-        },
-        {
-          stock: stock,
-          quantity: 1,
-          price: 121,
-          status: OrderStatus.Open,
-          type: OrderType.Sell
-        },
-        {
-          stock: stock,
-          quantity: 1,
-          price: 130,
-          status: OrderStatus.Open,
-          type: OrderType.Sell
-        }
-      ]
-    }
-    else {
-      orders = [
-        {
-          stock: stock,
-          quantity: 2,
-          price: 15,
-          status: OrderStatus.Open,
-          type: OrderType.Buy
-        }
-      ]
-    }
-    return orders.filter(filterOrderType(orderType));
-  }
-}
-
-function filterOrderType(orderType) {
-  return function(element) {
-    return (orderType.indexOf(element.type)>-1); 
+  getSellOrders(stock: Stock): Observable<Order[]> {
+    return this.http.get<Order[]>("/api/orders/sell", {
+      params: {
+        stockSymbol: stock.symbol
+      }
+    });
   }
 }

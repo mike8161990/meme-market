@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { ExchangeService } from '../services/exchange.service';
-import { Stock } from '../types';
+import { Order, Stock } from '../types';
 
 @Component({
   selector: 'app-order-view',
@@ -13,8 +13,10 @@ export class OrderViewComponent implements OnInit {
   selectedStock: Stock;
   allStocks: Stock[];
 
+  buyOrders: Order[];
+  sellOrders: Order[];
+
   displayedColumns: string[] = [
-    "stock",
     "quantity",
     "price"
   ]
@@ -22,12 +24,24 @@ export class OrderViewComponent implements OnInit {
   constructor(public readonly exchangeService: ExchangeService) { }
 
   ngOnInit(): void {
-    this.allStocks = this.exchangeService.getStocks();
-    this.selectedStock = this.allStocks[0];
+    this.exchangeService.getAllStocks().subscribe((allStocks: Stock[]) => {
+      this.allStocks = allStocks;
+      this.selectedStock = this.allStocks[0];
+      this.refreshOrders();
+    });
+  }
+
+  refreshOrders() {
+    this.exchangeService.getBuyOrders(this.selectedStock).subscribe((buyOrders: Order[]) => {
+      this.buyOrders = buyOrders;
+    });
+    this.exchangeService.getSellOrders(this.selectedStock).subscribe((sellOrders: Order[]) => {
+      this.sellOrders = sellOrders;
+    });
   }
 
   stockSelected(event: MatSelectChange): void {
     this.selectedStock = event.value;
+    this.refreshOrders();
   }
-
 }

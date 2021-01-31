@@ -18,11 +18,12 @@ export class PositionViewComponent implements OnInit {
     "marketPrice",
     "netChange"
   ]
-  
+
   constructor(public readonly exchangeService: ExchangeService) { }
 
   ngOnInit(): void {
-    this.positions = this.exchangeService.getPositions();
+    this.exchangeService.getPositions().subscribe((positions: Position[]) => {
+      this.positions = positions;
+    });
   }
-
 }

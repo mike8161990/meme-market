@@ -10,18 +10,17 @@ export class Stock {
 }
 
 export enum OrderType {
-    Buy = "Buy",
-    Sell ="Sell",
+    Buy = 0,
+    Sell = 1,
 }
 
 export enum OrderStatus {
-    Open = "Open",
-    Closed = "Closed",
-    Cancelled = "Cancelled",
+    Open = 0,
+    Closed = 1,
+    Cancelled = 2,
 }
 
 export class Order {
-    stock: Stock;
     type: OrderType;
     status: OrderStatus;
     quantity: number;

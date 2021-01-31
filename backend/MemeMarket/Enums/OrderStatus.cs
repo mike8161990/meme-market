@@ -5,12 +5,12 @@ namespace MemeMarket.Enums
     public enum OrderStatus
     {
         [Description("Open")]
-        Open,
+        Open = 0,
 
         [Description("Completed")]
-        Completed,
+        Completed = 1,
 
         [Description("Cancelled")]
-        Cancelled
+        Cancelled = 2
     }
 }

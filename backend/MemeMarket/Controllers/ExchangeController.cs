@@ -46,14 +46,16 @@ namespace MemeMarket.Controllers
         [Route("orders/buy")]
         public IEnumerable<Order> GetBuyOrders(string stockSymbol)
         {
-            return this.GenerateFakeOrders(OrderType.Buy);
+            return this.GenerateFakeOrders(OrderType.Buy)
+                .OrderBy(o => o.Price);
         }
 
         [HttpGet]
         [Route("orders/sell")]
         public IEnumerable<Order> GetSellOrders(string stockSymbol)
         {
-            return this.GenerateFakeOrders(OrderType.Sell);
+            return this.GenerateFakeOrders(OrderType.Sell)
+                .OrderByDescending(o => o.Price);
         }
 
         [HttpGet]
