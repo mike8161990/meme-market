@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Order, OrderStatus, OrderType, Stock } from '../types';
+import { Order, OrderStatus, OrderType, Position, Stock } from '../types';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,14 @@ export class ExchangeService {
         symbol: "AMC"
       }
     ]
+  }
+
+  getPositions(): Position[] {
+    return this.getStocks().map(s => <Position> {
+      stock: s,
+      cost: Math.random() * 30,
+      quantity: Math.random() * 10
+    });
   }
 
   getStockOrders(stock: Stock): Order[] {

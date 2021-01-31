@@ -10,11 +10,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { OrderViewComponent } from './order-view/order-view.component';
+import { PositionViewComponent } from './position-view/position-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrderViewComponent,
+    PositionViewComponent,
   ],
   imports: [
     BrowserModule,
