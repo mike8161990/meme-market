@@ -30,5 +30,7 @@ export class Order {
 export class Position {
     stock: Stock;
     quantity: number;
-    cost: number;
+    costBasis: number;
+    marketPrice: number;
+    netChange: number;
 }

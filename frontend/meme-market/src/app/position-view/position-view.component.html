@@ -12,17 +12,17 @@
 
         <ng-container matColumnDef="costBasis">
             <th mat-header-cell *matHeaderCellDef>Cost Basis</th>
-            <td mat-cell *matCellDef="let element">{{ element.cost | currency }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.costBasis | currency }}</td>
         </ng-container>
 
         <ng-container matColumnDef="marketPrice">
             <th mat-header-cell *matHeaderCellDef>Market Price</th>
-            <td mat-cell *matCellDef="let element">{{ element.cost | currency }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.marketPrice | currency }}</td>
         </ng-container>
 
         <ng-container matColumnDef="netChange">
             <th mat-header-cell *matHeaderCellDef>Net Change</th>
-            <td mat-cell *matCellDef="let element">{{ element.cost | currency }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.netChange | currency }}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -66,8 +66,10 @@ namespace MemeMarket.Controllers
             return this.GetAllStocks().Select(s => new Position
             {
                 Stock = s,
-                Cost = rng.NextDouble() * 30,
-                Quanity = rng.NextDouble() * 100
+                CostBasis = rng.NextDouble() * 30,
+                Quantity = rng.NextDouble() * 100,
+                MarketPrice = rng.NextDouble() * 30,
+                NetChange = rng.NextDouble() * 30
             });
         }
 
