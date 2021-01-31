@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MemeCardComponent } from './meme-card.component';
+import { OrderViewComponent } from './order-view.component';
 
-describe('MemeCardComponent', () => {
-  let component: MemeCardComponent;
-  let fixture: ComponentFixture<MemeCardComponent>;
+describe('OrderViewComponent', () => {
+  let component: OrderViewComponent;
+  let fixture: ComponentFixture<OrderViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MemeCardComponent ]
+      declarations: [ OrderViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MemeCardComponent);
+    fixture = TestBed.createComponent(OrderViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
