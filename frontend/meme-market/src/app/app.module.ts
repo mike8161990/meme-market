@@ -11,6 +11,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { OrderViewComponent } from './order-view/order-view.component';
 import { PositionViewComponent } from './position-view/position-view.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,16 @@ import { PositionViewComponent } from './position-view/position-view.component';
     MatFormFieldModule,
     MatSelectModule,
     MatTableModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    RouterModule.forRoot([
+      {path: '', pathMatch: 'full', redirectTo: 'positions'},
+      {path: 'orders', component: OrderViewComponent},
+      {path: 'positions', component: PositionViewComponent},
+    ]),
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
