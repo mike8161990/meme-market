@@ -14,7 +14,9 @@ export class PositionViewComponent implements OnInit {
   displayedColumns: string[] = [
     "stock",
     "quantity",
-    "cost"
+    "costBasis",
+    "marketPrice",
+    "netChange"
   ]
   
   constructor(public readonly exchangeService: ExchangeService) { }
