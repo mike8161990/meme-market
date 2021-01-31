@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
+import { OrderFormComponent } from '../order-form/order-form.component';
 import { ExchangeService } from '../services/exchange.service';
 import { Order, Stock } from '../types';
 
@@ -21,7 +23,10 @@ export class OrderViewComponent implements OnInit {
     "price"
   ]
 
-  constructor(public readonly exchangeService: ExchangeService) { }
+  constructor(
+    public readonly exchangeService: ExchangeService,
+    private readonly dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.exchangeService.getAllStocks().subscribe((allStocks: Stock[]) => {
@@ -43,5 +48,17 @@ export class OrderViewComponent implements OnInit {
   stockSelected(event: MatSelectChange): void {
     this.selectedStock = event.value;
     this.refreshOrders();
+  }
+
+  openOrderForm(): void {
+    let dialogRef = this.dialog.open(OrderFormComponent, {
+      data: {
+        stockSymbol: this.selectedStock.symbol
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.refreshOrders();
+    })
   }
 }

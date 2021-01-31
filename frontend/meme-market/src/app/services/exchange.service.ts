@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Order, Position, Stock } from '../types';
+import { NewOrderRequest, Order, Position, Stock } from '../types';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +32,9 @@ export class ExchangeService {
         stockSymbol: stock.symbol
       }
     });
+  }
+
+  placeOrder(newOrderRequest: NewOrderRequest): void {
+    this.http.post<void>("/api/orders/place", newOrderRequest).subscribe();
   }
 }

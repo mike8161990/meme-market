@@ -15,14 +15,19 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { OrderFormComponent } from './order-form/order-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrderViewComponent,
     PositionViewComponent,
+    OrderFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatInputModule,
+    MatDialogModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot([
       {path: '', pathMatch: 'full', redirectTo: 'positions'},
       {path: 'orders', component: OrderViewComponent},
@@ -46,6 +54,9 @@ import { HttpClientModule } from '@angular/common/http';
   
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    OrderFormComponent
+  ]
 })
 export class AppModule { }

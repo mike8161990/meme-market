@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MemeMarket.Dtos;
 using MemeMarket.Enums;
+using MemeMarket.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -13,10 +15,15 @@ namespace MemeMarket.Controllers
     public class ExchangeController : ControllerBase
     {
         private readonly ILogger<ExchangeController> logger;
+        private readonly IOrderService orderService;
 
-        public ExchangeController(ILogger<ExchangeController> logger)
+        public ExchangeController(
+            ILogger<ExchangeController> logger,
+            IOrderService orderService
+        )
         {
             this.logger = logger;
+            this.orderService = orderService;
         }
 
         [HttpGet]
@@ -44,18 +51,23 @@ namespace MemeMarket.Controllers
 
         [HttpGet]
         [Route("orders/buy")]
-        public IEnumerable<Order> GetBuyOrders(string stockSymbol)
+        public async Task<IEnumerable<Order>> GetBuyOrders(string stockSymbol)
         {
-            return this.GenerateFakeOrders(OrderType.Buy)
-                .OrderBy(o => o.Price);
+            return await this.orderService.GetOpenBuyOrders(stockSymbol);
         }
 
         [HttpGet]
         [Route("orders/sell")]
-        public IEnumerable<Order> GetSellOrders(string stockSymbol)
+        public async Task<IEnumerable<Order>> GetSellOrders(string stockSymbol)
         {
-            return this.GenerateFakeOrders(OrderType.Sell)
-                .OrderByDescending(o => o.Price);
+            return await this.orderService.GetOpenSellOrders(stockSymbol);
+        }
+
+        [HttpPost]
+        [Route("orders/place")]
+        public async Task PlaceOrder(NewOrderRequest orderRequest)
+        {
+            await this.orderService.PlaceOrder(orderRequest);
         }
 
         [HttpGet]

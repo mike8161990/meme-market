@@ -34,3 +34,11 @@ export class Position {
     marketPrice: number;
     netChange: number;
 }
+
+export class NewOrderRequest {
+    stockSymbol: string;
+    traderId: number;
+    quantity: number;
+    price: number;
+    type: OrderType;
+}
